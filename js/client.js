@@ -22,7 +22,7 @@ var plot = $.plot("#placeholder", datasets, {
 	},
 	yaxis: {
 		min: -1,
-		max: 201
+		max: 2800
 	},
 	xaxis: {
 		show: false
@@ -60,8 +60,10 @@ var counter = maximum;
 	var conn = io.connect();
 
 	conn.on('heartbeat', function (data) {
+		// console.log('heartbeat', data);
+
 		// if (counter++ % 2) {
-			datasets[0].data.push([counter, data]);
+		datasets[0].data.push([counter, data]);
 		counter++;
 		$.each(datasets, function(order) {
 			if (datasets[order].data.length > maximum) {
