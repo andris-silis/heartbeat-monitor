@@ -14,23 +14,20 @@ var heartbeatCycleValues = [
 var currentDb = db.getMongo().getDB('heartbeat-monitor');
 
 
-var days = 2;
+var days = 1;
 
 var now = moment();
 var time = moment().subtract('days', days);
-var ms10 = moment.duration(100, 'ms');
+var seconds30 = moment.duration(30, 'seconds');
 var valCounter = 0;
 
 
-
-var seconds30 = moment.duration(30, 'seconds');
-
 var docs = [];
 while (true) {
-	time.add(seconds30);
-
+	time = time.add(seconds30);
+	// print(time);
 	docs.push({
-		ts: time.toDate(),
+		ts: time.clone().toDate(),
 		val: 36.6,
 		__v: 0
 	});
@@ -44,12 +41,13 @@ currentDb.temperatures.insert(docs, { writeConcern: 0 });
 
 
 time = moment().subtract('days', days);
+var ms10 = moment.duration(100, 'ms');
 docs = [];
 while (true) {
-	time.add(ms10);
+	time = time.add(ms10);
 
 	docs.push({
-		ts: time.toDate(),
+		ts: time.clone().toDate(),
 		val: heartbeatCycleValues[valCounter],
 		__v: 0
 	});
