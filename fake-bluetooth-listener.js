@@ -10,7 +10,7 @@ socket.on('disconnect', function () {
 var previous = 100;
 var sendFakeHeartbeat = function () {
     setTimeout(function () {
-        var level = previous + Math.random() * 10 - 5;
+        var level = parseInt(previous + Math.random() * 10 - 5, 10);
         if (level < 0) {
             level = 0;
         } else if (level > 200) {
@@ -27,3 +27,5 @@ var sendFakeHeartbeat = function () {
     40);
 };
 sendFakeHeartbeat();
+
+
