@@ -25,15 +25,21 @@ var initApp = function () {
 	app.listen(7076);
 
 
-
+	var previous = 100;
 	var sendFakeHeartbeat = function () {
 		setTimeout(function () {
-			var level = parseInt(Math.random() * 200, 10);
+			var level = previous + Math.random() * 10 - 5;
+			if (level < 0) {
+				level = 0;
+			} else if (level > 200) {
+				level = 200;
+			}
 			app.io.broadcast('heartbeat', level);
 			console.log('heartbeat', level);
+			previous = level;
 			sendFakeHeartbeat();
 		},
-		300);
+		40);
 	};
 	sendFakeHeartbeat();
 
