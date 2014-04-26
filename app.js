@@ -6,6 +6,8 @@ var initApp = function () {
 	var path = require('path');
 	var views = require('./views');
 
+	var mongoose = require('mongoose');
+	mongoose.connect('mongodb://localhost/heartbeat-monitor');
 
 	app.http().io();
 
