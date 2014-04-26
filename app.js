@@ -4,6 +4,10 @@ var initApp = function () {
 	var express = require('express.io');
 	var app = express();
 	var path = require('path');
+	var views = require('./views');
+	var models = require('./models');
+
+
 	app.http().io();
 
 	console.log(path.join(__dirname, 'node_modules'));
@@ -20,10 +24,7 @@ var initApp = function () {
 	});
 
 
-	app.get('/', function (req, res) {
-		res.sendfile(__dirname + '/client.html');
-	});
-
+	app.get('/', views.clientHtml);
 	app.listen(7076);
 
 
