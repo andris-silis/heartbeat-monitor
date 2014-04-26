@@ -1,0 +1,21 @@
+{
+  "name": "Heartbeat monitor",
+  "version": "0.0.1",
+  "homepage": "https://github.com/andris-silis/heartbeat-monitor",
+  "authors": [
+    "_"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.0",
+    "smoothie": "https://github.com/joewalnes/smoothie.git"
+  }
+}
