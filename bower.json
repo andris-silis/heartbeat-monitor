@@ -16,6 +16,6 @@
   ],
   "dependencies": {
     "jquery": "~2.1.0",
-    "smoothie": "https://github.com/joewalnes/smoothie.git"
+    "flot": "~0.8.3"
   }
 }
