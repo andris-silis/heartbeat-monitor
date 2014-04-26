@@ -12,7 +12,7 @@ var clientRealtimeHtml = function (req, res) {
 };
 var clientHistoryHtml = function (req, res) {
 	res.sendfile(__dirname + '/clientHistory.html');
-
+};
 
 var endpointBase = function (modelClass, req, res) {
 	var limit = req.params.id || 36;
@@ -36,4 +36,4 @@ module.exports = {
 	clientHistoryHtml: clientHistoryHtml,
 	heartbeatData: heartbeatData,
 	temperatureData: temperatureData
-};
+}

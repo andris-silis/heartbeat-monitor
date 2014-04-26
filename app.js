@@ -36,8 +36,7 @@ var initApp = function () {
 			} else if (level > 200) {
 				level = 200;
 			}
-			app.io.broadcast('heartbeat', level);
-			console.log('heartbeat', level);
+			app.io.broadcast('heartbeat', parseInt(level));
 			previous = level;
 			sendFakeHeartbeat();
 		},

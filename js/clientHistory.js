@@ -1,49 +1,74 @@
-var container = $("#placeholder");
-var maximum = parseInt(container.outerWidth() / 2) || 300;
-var data = [];
+$.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=large-dataset.json&callback=?', function(data) {
 
-function getInitialData() {
-	return [];
-};
+    // Create a timer
+    var start = + new Date();
 
-var datasets = [
-	{
-		data: getInitialData()
-	}
-];
-// var plot = $.plot("#placeholder", datasets, {
-// 	series: {
-// 		shadowSize: 0	// Drawing is faster without shadows
-// 	},
-// 	yaxis: {
-// 		min: -1,
-// 		max: 201
-// 	},
-// 	xaxis: {
-// 		show: false
-// 	},
-// 	grid: {
-// 		borderWidth: 1,
-// 		minBorderMargin: 20,
-// 		labelMargin: 10,
-// 		backgroundColor: {
-// 			colors: ["#fff", "#e4f4f4"]
-// 		},
-// 		margin: {
-// 			top: 8,
-// 			bottom: 20,
-// 			left: 20
-// 		},
-// 		markings: function(axes) {
-// 			var markings = [];
-// 			var xaxis = axes.xaxis;
-// 			for (var x = Math.floor(xaxis.min); x < xaxis.max; x += xaxis.tickSize * 2) {
-// 				markings.push({ xaxis: { from: x, to: x + xaxis.tickSize }, color: "rgba(232, 232, 255, 0.2)" });
-// 			}
-// 			return markings;
-// 		}
-// 	},
-// 	legend: {
-// 		show: true
-// 	}
-// });
+    // Create the chart
+    $('#placeholder').highcharts('StockChart', {
+        chart: {
+            events: {
+                load: function(chart) {
+                    this.setTitle(null, {
+                        text: 'Built chart in '+ (new Date() - start) +'ms'
+                    });
+                }
+            },
+            zoomType: 'x'
+        },
+
+        rangeSelector: {
+            inputEnabled: $('#placeholder').width() > 480,
+            buttons: [{
+                type: 'day',
+                count: 3,
+                text: '3d'
+            }, {
+                type: 'week',
+                count: 1,
+                text: '1w'
+            }, {
+                type: 'month',
+                count: 1,
+                text: '1m'
+            }, {
+                type: 'month',
+                count: 6,
+                text: '6m'
+            }, {
+                type: 'year',
+                count: 1,
+                text: '1y'
+            }, {
+                type: 'all',
+                text: 'All'
+            }],
+            selected: 3
+        },
+
+        yAxis: {
+            title: {
+                text: 'Temperature (°C)'
+            }
+        },
+
+        title: {
+            text: 'Hourly temperatures in Vik i Sogn, Norway, 2004-2010'
+        },
+
+        subtitle: {
+            text: 'Built chart in ...' // dummy text to reserve space for dynamic subtitle
+        },
+
+        series: [{
+            name: 'Temperature',
+            data: data,
+            pointStart: Date.UTC(2004, 3, 1),
+            pointInterval: 3600 * 1000,
+            tooltip: {
+                valueDecimals: 1,
+                valueSuffix: '°C'
+            }
+        }]
+
+    });
+});
