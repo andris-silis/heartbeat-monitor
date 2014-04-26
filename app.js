@@ -24,10 +24,15 @@ var initApp = function () {
 	app.get('/history', views.clientHistoryHtml);
 	app.get('/-api/heartbeats', views.heartbeatData);
 	app.get('/-api/temperature', views.temperatureData);
+
+	// incoming heartbeat from bluetooth listener process
+	app.io.route('heartbeat', function (req) {
+		var level = req.data;
+		console.log('Incoming heartbeat', level);
+		app.io.broadcast('heartbeat', level);
+	});
+
 	app.listen(7076);
-
-
-
 };
 
 
