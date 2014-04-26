@@ -3,6 +3,10 @@ var io = require('socket.io-client');
 var socket = io.connect('http://localhost:7076');
 
 
+socket.on('disconnect', function () {
+	console.log('disconnect');
+});
+
 var previous = 100;
 var sendFakeHeartbeat = function () {
     setTimeout(function () {
