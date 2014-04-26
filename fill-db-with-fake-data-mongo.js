@@ -16,19 +16,22 @@ var heartbeatCycleValues = [
 var currentDb = db.getMongo().getDB('heartbeat-monitor');
 
 
-var days = 30;
+var days = 10;
 
 var now = moment();
 var time = moment().subtract('days', days);
 var ms10 = moment.duration(100, 'ms');
 var valCounter = 0;
 
+
+var docs = [];
 while (true) {
 	time.add(ms10);
 
-	currentDb.temperatures.insert({
+	docs.push({
 		ts: time.toDate(),
-		val: heartbeatCycleValues[valCounter]
+		val: heartbeatCycleValues[valCounter],
+		__v: 0
 	});
 
 	if (valCounter >= heartbeatCycleValues.length - 1) {
@@ -42,4 +45,6 @@ while (true) {
 	}
 }
 
+print('inserting');
+currentDb.heartbeats.insert(docs, { writeConcern: 0 });
 
