@@ -13,7 +13,9 @@ var clientHtml = function (req, res) {
 
 
 var heartbeatData = function (req, res) {
-	models.Temperature.find(function (err, data) {
+	var limit = req.params.id || 36;
+
+	models.Heartbeat.find().select('val ts').lean().limit(limit).sort('ts').exec(function (err, data) {
 		if (err) {
 			res.send(400);
 			return;
@@ -21,7 +23,7 @@ var heartbeatData = function (req, res) {
 
 		res.send(data);
 	});
-}
+};
 
 
 
