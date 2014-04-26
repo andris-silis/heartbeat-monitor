@@ -23,6 +23,7 @@ var initApp = function () {
 	app.get('/realtime', views.clientRealtimeHtml);
 	app.get('/history', views.clientHistoryHtml);
 	app.get('/-api/heartbeats', views.heartbeatData);
+	app.get('/-api/temperature', views.temperatureData);
 	app.listen(7076);
 
 
