@@ -1,5 +1,6 @@
-var models = require('./models');
 var _ = require('lodash');
+var moment = require('moment');
+var models = require('./models');
 
 
 // Gonna move to require.js later garage48
@@ -12,12 +13,31 @@ var clientRealtimeHtml = function (req, res) {
 };
 var clientHistoryHtml = function (req, res) {
 	res.sendfile(__dirname + '/clientHistory.html');
-
+}
 
 var endpointBase = function (modelClass, req, res) {
-	var limit = req.params.id || 36;
+	var fromTs, toTs;
 
-	modelClass.find().select('val ts').lean().limit(limit).sort('ts').exec(function (err, data) {
+	if (req.params.from_ts) {
+		fromTs = moment.unix(req.params.from_ts).toDate();
+	} else {
+		fromTs = moment().subtract('minutes', 5).toDate();
+	}
+
+	if (req.params.to_ts) {
+		toTs = moment.unix(req.params.to_ts).toDate();
+	} else {
+		toTs = moment().toDate();
+	}
+
+
+	modelClass
+	.find()
+	.where('ts').gt(fromTs).lt(toTs)
+	.select('val ts')
+	.lean()
+	.sort('ts')
+	.exec(function (err, data) {
 		if (err) {
 			res.send(400);
 			return;
