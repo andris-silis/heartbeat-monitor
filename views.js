@@ -56,8 +56,4 @@ module.exports = {
 	clientHistoryHtml: clientHistoryHtml,
 	heartbeatData: heartbeatData,
 	temperatureData: temperatureData
-<<<<<<< HEAD
-}
-=======
 };
->>>>>>> 539d7d8e7e6928f996d3ae89fc1c0a4a0a1bf8e9
