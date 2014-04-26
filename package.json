@@ -10,6 +10,7 @@
     "lodash": "^2.4.1",
     "moment": "^2.6.0",
     "mongoose": "^3.8.8",
-    "socket.io": "*"
+    "socket.io": "*",
+    "socket.io-client": "^0.9.16"
   }
 }
