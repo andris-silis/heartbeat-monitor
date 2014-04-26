@@ -23,10 +23,12 @@ var endpointBase = function (modelClass, req, res) {
 
 
 var heartbeatData = _.partial(endpointBase, models.Heartbeat);
+var temperatureData = _.partial(endpointBase, models.Temperature);
 
 
 module.exports = {
 	clientHtml: clientHtml,
-	heartbeatData: heartbeatData
-}
+	heartbeatData: heartbeatData,
+	temperatureData: temperatureData
+};
 

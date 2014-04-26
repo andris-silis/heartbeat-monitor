@@ -21,6 +21,7 @@ var initApp = function () {
 
 	app.get('/', views.clientHtml);
 	app.get('/-api/heartbeats', views.heartbeatData);
+	app.get('/-api/temperature', views.temperatureData);
 	app.listen(7076);
 
 
