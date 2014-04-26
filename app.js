@@ -26,11 +26,7 @@ var initApp = function () {
 	app.get('/-api/temperature', views.temperatureData);
 
 	// incoming heartbeat from bluetooth listener process
-	app.io.route('heartbeat', function (req) {
-		var level = req.data;
-		console.log('Incoming heartbeat', level);
-		app.io.broadcast('heartbeat', level);
-	});
+	app.io.route('heartbeat', views.inputHeartbeat);
 
 	app.listen(7076);
 };

@@ -50,10 +50,20 @@ var endpointBase = function (modelClass, req, res) {
 var heartbeatData = _.partial(endpointBase, models.Heartbeat);
 var temperatureData = _.partial(endpointBase, models.Temperature);
 
+
+
+var inputHeartbeat = function (req) {
+	var level = req.data;
+	console.log('Incoming heartbeat', level);
+	req.io.broadcast('heartbeat', level);
+};
+
+
 module.exports = {
 	clientHomepage: clientHomepage,
 	clientRealtimeHtml: clientRealtimeHtml,
 	clientHistoryHtml: clientHistoryHtml,
 	heartbeatData: heartbeatData,
-	temperatureData: temperatureData
+	temperatureData: temperatureData,
+	inputHeartbeat: inputHeartbeat
 };
