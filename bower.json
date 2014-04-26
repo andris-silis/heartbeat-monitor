@@ -16,7 +16,8 @@
   ],
   "dependencies": {
     "jquery": "~2.1.0",
+    "moment": "~2.6.0",
     "flot": "~0.8.3",
-    "moment": "~2.6.0"
+    "highcharts": "*"
   }
 }
