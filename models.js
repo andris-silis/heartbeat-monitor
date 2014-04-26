@@ -8,5 +8,5 @@ var Temperature = new mongoose.Schema({
 
 
 module.exports = {
-	Temperature: Temperature
+	Temperature: mongoose.model('Temperature', Temperature)
 };
