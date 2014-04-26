@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var Temperature = new mongoose.Schema({
+var TemperatureSchema = new mongoose.Schema({
 	val: Number,
     ts: Date
 });
@@ -8,5 +8,5 @@ var Temperature = new mongoose.Schema({
 
 
 module.exports = {
-	Temperature: mongoose.model('Temperature', Temperature)
+	Temperature: mongoose.model('Temperature', TemperatureSchema)
 };
