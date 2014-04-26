@@ -19,7 +19,9 @@ var initApp = function () {
 	app.use('/js', express.static(path.join(__dirname, 'js')));
 
 
-	app.get('/', views.clientHtml);
+	app.get('/', views.clientHomepage);
+	app.get('/realtime', views.clientRealtimeHtml);
+	app.get('/history', views.clientHistoryHtml);
 	app.get('/-api/heartbeats', views.heartbeatData);
 	app.listen(7076);
 
@@ -46,8 +48,3 @@ var initApp = function () {
 
 
 initApp();
-
-
-
-
-
