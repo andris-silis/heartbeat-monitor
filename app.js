@@ -18,15 +18,8 @@ var initApp = function () {
 	app.use('/js', express.static(path.join(__dirname, 'js')));
 
 
-	// Broadcast the new visitor event on ready route.
-	app.io.route('ready', function (req) {
-		req.io.broadcast('new visitor');
-	});
-
-
 	app.get('/', views.clientHtml);
 	app.listen(7076);
-
 
 
 
