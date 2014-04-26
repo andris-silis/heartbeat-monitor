@@ -7,10 +7,6 @@ socket.on('disconnect', function () {
 });
 
 
-// console.log('Sending heartbeat', level);
-// socket.emit('heartbeat', level, function(resp, data) {
-// 	console.log('server sent resp code ' + resp);
-// });
 
 
 
@@ -19,19 +15,32 @@ var serialPort = new serialport.SerialPort(
     "/dev/tty.RNBT-356E-RNI-SPP",
     {
         baudrate: 115200,
-        parser: serialport.parsers.raw
+        parser: serialport.parsers.readline("\n")
     }
 );
 
 serialPort.open(function () {
+	var re = /(S|Q)([0-9]*)/;
+
     console.log('open');
     serialPort.on('data', function(data) {
-        console.log(data.toString());
+		var res = data.match(re);
 
-    });
-    serialPort.write("ls\n", function(err, results) {
-        console.log('err ' + err);
-        console.log('results ' + results);
+		if (!res) {
+			return;
+		}
+
+		var type = res[1];
+		var value = res[2];
+
+        console.log(type, value);
+
+    	if (type == 'S') {
+			console.log('Sending heartbeat', value);
+			socket.emit('heartbeat', value, function(resp, data) {
+				console.log('server sent resp code ' + resp);
+			});
+    	}
     });
 });
 
