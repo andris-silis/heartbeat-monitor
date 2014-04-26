@@ -18,14 +18,14 @@ var clientHistoryHtml = function (req, res) {
 var endpointBase = function (modelClass, req, res) {
 	var fromTs, toTs;
 
-	if (req.params.from_ts) {
-		fromTs = moment.unix(req.params.from_ts).toDate();
+	if (req.query.from_ts) {
+		fromTs = moment.unix(req.query.from_ts).toDate();
 	} else {
 		fromTs = moment().subtract('minutes', 5).toDate();
 	}
 
-	if (req.params.to_ts) {
-		toTs = moment.unix(req.params.to_ts).toDate();
+	if (req.query.to_ts) {
+		toTs = moment.unix(req.query.to_ts).toDate();
 	} else {
 		toTs = moment().toDate();
 	}
