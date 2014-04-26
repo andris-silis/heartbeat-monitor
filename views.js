@@ -1,21 +1,17 @@
 var models = require('./models');
-
-
-
+var _ = require('lodash');
 
 
 // Gonna move to require.js later garage48
-
-
 var clientHtml = function (req, res) {
 	res.sendfile(__dirname + '/client.html');
 };
 
 
-var heartbeatData = function (req, res) {
+var endpointBase = function (modelClass, req, res) {
 	var limit = req.params.id || 36;
 
-	models.Heartbeat.find().select('val ts').lean().limit(limit).sort('ts').exec(function (err, data) {
+	modelClass.find().select('val ts').lean().limit(limit).sort('ts').exec(function (err, data) {
 		if (err) {
 			res.send(400);
 			return;
@@ -26,6 +22,7 @@ var heartbeatData = function (req, res) {
 };
 
 
+var heartbeatData = _.partial(endpointBase, models.Heartbeat);
 
 
 module.exports = {
