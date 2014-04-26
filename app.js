@@ -5,7 +5,6 @@ var initApp = function () {
 	var app = express();
 	var path = require('path');
 	var views = require('./views');
-	var models = require('./models');
 
 
 	app.http().io();
@@ -19,6 +18,7 @@ var initApp = function () {
 
 
 	app.get('/', views.clientHtml);
+	app.get('/-api/heartbeats', views.heartbeatData);
 	app.listen(7076);
 
 
