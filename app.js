@@ -31,14 +31,12 @@ var initApp = function () {
 
 	var sendFakeHeartbeat = function () {
 		setTimeout(function () {
-			app.io.broadcast(
-				'heartbeat',
-				parseInt(Math.random() * 200, 10)
-			);
-			console.log('brot');
+			var level = parseInt(Math.random() * 200, 10);
+			app.io.broadcast('heartbeat', level);
+			console.log('heartbeat', level);
 			sendFakeHeartbeat();
 		},
-		1000);
+		300);
 	};
 	sendFakeHeartbeat();
 
