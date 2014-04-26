@@ -37,7 +37,7 @@ var initApp = function () {
 				level = 200;
 			}
 			app.io.broadcast('heartbeat', level);
-			console.log('heartbeat', level);
+			// console.log('heartbeat', level);
 			previous = level;
 			sendFakeHeartbeat();
 		},
