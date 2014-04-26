@@ -1,10 +1,12 @@
 var mongoose = require('mongoose');
 
-var HeartbeatSchema = new mongoose.Schema({
+var BaseSchema = new mongoose.Schema({
 	val: Number,
     ts: Date
 });
-HeartbeatSchema.index({ ts: 1 });
+BaseSchema.index({ ts: 1 });
+
+var HeartbeatSchema = BaseSchema;
 
 
 module.exports = {
