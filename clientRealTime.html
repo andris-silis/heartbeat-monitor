@@ -7,7 +7,7 @@
     <link rel='stylesheet' href='/js/bootstrap.min.css'>
     <link rel='stylesheet' href='/js/style.css'>
 </head>
-<body onload="createTimeline()">v
+<body>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -38,12 +38,12 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div class="row">
                 <canvas id="chart" width="800px" height="320px"></canvas>
-                <div id="bpm" style="font-size:64px;">
-                    <span style="border-radius:4px"></span>
-                </div>
             </div>
-            <div class="row">
-                <canvas id="chart-heartrate" width="640px" height="320px"></canvas>
+            <div class="row" style="margin-top:8px;">
+                <canvas id="chart-heartrate" width="658px" height="320px" style="float:left"></canvas>
+                <div id="bpm" style="font-size:64px;">
+                    <span style="display: inline-block;height:93px;text-align:center;border-radius:4px;position:relative;left:14px;width:128px;"></span>
+                </div>
             </div>
         </div>
     </div>
