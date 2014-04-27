@@ -25,7 +25,16 @@ function createTimeline() {
 	conn.on('heartbeat', appendData);
 
 	conn.on('bpm', function (data) {
-		$('#bpm').text(data.value);
+		var bpm = data.value;
+		var $bpm = $('#bpm span');
+
+		if (bpm < 50 || bpm > 100) {
+			$bpm.css({ background: 'red' });
+		} else {
+			$bpm.css({ background: 'none' });
+		}
+
+		$bpm.text(bpm);
 	});
 
 	window.conn = conn;
