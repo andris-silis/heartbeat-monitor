@@ -50,7 +50,7 @@ $.getJSON('/-api/heartbeats?to_ts=1398459968&from_ts=1398451966', function(data)
         },
 
         title: {
-            text: null
+            text: 'Heartbeat history data'
         },
 
         // subtitle: {
