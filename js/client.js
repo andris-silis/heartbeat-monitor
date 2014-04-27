@@ -2,7 +2,7 @@
 var heartbeatSeries = new TimeSeries();
 function createTimeline() {
 	var chart = new SmoothieChart({
-		yRangeFunction: function () { return { min: 100, max: 1000 } }
+		yRangeFunction: function () { return { min: 150, max: 1000 } }
 	});
 	chart.addTimeSeries(
 		heartbeatSeries,
@@ -17,7 +17,7 @@ function createTimeline() {
 var bpmSeries = new TimeSeries();
 function createTimelineHeartrate() {
 	var chart = new SmoothieChart({
-		yRangeFunction: function () { return { min: 20, max: 180 } }
+		yRangeFunction: function () { return { min: 50, max: 150 } }
 	});
 	chart.addTimeSeries(
 		bpmSeries,
