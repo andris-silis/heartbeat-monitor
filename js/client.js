@@ -21,8 +21,8 @@ var plot = $.plot("#placeholder", datasets, {
 		shadowSize: 0	// Drawing is faster without shadows
 	},
 	yaxis: {
-		min: -1000,
-		max: 1800
+		min: -900,
+		max: 1500
 	},
 	xaxis: {
 		show: false
@@ -53,18 +53,25 @@ var plot = $.plot("#placeholder", datasets, {
 	}
 });
 
-var counter = maximum;
-
 (function (io) {
 	'use strict';
 	var conn = io.connect();
+	var firstTs;
 
 	conn.on('heartbeat', function (data) {
+		var ts = data.ts;
+		var value = data.value;
+
+		if (!firstTs) {
+			firstTs = ts;
+		}
+		ts = ts - firstTs + maximum;
+
+
 		// console.log('heartbeat', data);
 
 		// if (counter++ % 2) {
-		datasets[0].data.push([counter, data]);
-		counter++;
+		datasets[0].data.push([ts, value]);
 		$.each(datasets, function(order) {
 			if (datasets[order].data.length > maximum) {
 				datasets[order].data.shift();
@@ -77,7 +84,7 @@ var counter = maximum;
 	});
 
 	conn.on('bpm', function (data) {
-		$('#bpm').text(data);
+		$('#bpm').text(data.value);
 	});
 
 	window.conn = conn;
