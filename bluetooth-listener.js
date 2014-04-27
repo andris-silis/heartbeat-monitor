@@ -20,7 +20,7 @@ var serialPort = new serialport.SerialPort(
 );
 
 serialPort.open(function () {
-	var re = /(S|Q)([0-9]*)/;
+	var re = /(S|Q|B)([0-9]*)/;
 
     console.log('open');
     serialPort.on('data', function(data) {
@@ -38,6 +38,11 @@ serialPort.open(function () {
     	if (type == 'S') {
 			console.log('Sending heartbeat', value);
 			socket.emit('heartbeat', value, function(resp, data) {
+				console.log('server sent resp code ' + resp);
+			});
+    	} else if (type == 'B') {
+			console.log('Sending BPM', value);
+			socket.emit('bpm', value, function(resp, data) {
 				console.log('server sent resp code ' + resp);
 			});
     	}
