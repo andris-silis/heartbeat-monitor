@@ -27,7 +27,8 @@ var initApp = function () {
 
 	// incoming heartbeat from bluetooth listener process
 	app.io.route('heartbeat', views.inputHeartbeat);
-	
+	app.io.route('bpm', views.inputBPM);
+
 	app.listen(7076);
 };
 

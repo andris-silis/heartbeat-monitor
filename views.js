@@ -59,11 +59,26 @@ var inputHeartbeat = function (req) {
 };
 
 
+var inputBPM = function (req) {
+	var bpm = req.data;
+	console.log('Incoming bpm', bpm);
+
+	var bpm = new models.BPM({
+		ts: new Date(),
+		val: bpm
+	});
+	bpm.save();
+
+	req.io.broadcast('bpm', bpm);
+};
+
+
 module.exports = {
 	clientHomepage: clientHomepage,
 	clientRealtimeHtml: clientRealtimeHtml,
 	clientHistoryHtml: clientHistoryHtml,
 	heartbeatData: heartbeatData,
 	temperatureData: temperatureData,
-	inputHeartbeat: inputHeartbeat
+	inputHeartbeat: inputHeartbeat,
+	inputBPM: inputBPM
 };
