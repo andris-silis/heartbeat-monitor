@@ -76,5 +76,9 @@ var counter = maximum;
 		plot.draw();
 	});
 
+	conn.on('bpm', function (data) {
+		$('#bpm').text(data);
+	});
+
 	window.conn = conn;
 })(window.io);
