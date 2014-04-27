@@ -1,4 +1,5 @@
 var io = require('socket.io-client');
+var moment = require('moment');
 
 var socket = io.connect('http://localhost:7076');
 
@@ -23,7 +24,8 @@ serialPort.open(function () {
 	var re = /(S|Q|B)([0-9]*)/;
 
     console.log('open');
-    serialPort.on('data', function(data) {
+    serialPort.on('data', function (data) {
+    	var ts = moment().valueOf();
 		var res = data.match(re);
 
 		if (!res) {
@@ -33,16 +35,18 @@ serialPort.open(function () {
 		var type = res[1];
 		var value = res[2];
 
-        console.log(type, value);
+        console.log(ts, type, value);
 
     	if (type == 'S') {
+    		value = parseInt(value, 10);
 			console.log('Sending heartbeat', value);
-			socket.emit('heartbeat', value, function(resp, data) {
+			socket.emit('heartbeat', { ts: ts, value: value }, function(resp, data) {
 				console.log('server sent resp code ' + resp);
 			});
     	} else if (type == 'B') {
+    		value = parseInt(value, 10);
 			console.log('Sending BPM', value);
-			socket.emit('bpm', value, function(resp, data) {
+			socket.emit('bpm', { ts: ts, value: value }, function(resp, data) {
 				console.log('server sent resp code ' + resp);
 			});
     	}
