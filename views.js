@@ -55,6 +55,13 @@ var temperatureData = _.partial(endpointBase, models.Temperature);
 var inputHeartbeat = function (req) {
 	var level = req.data;
 	console.log('Incoming heartbeat', level);
+
+	var beat = new models.Heartbeat({
+		ts: new Date(),
+		val: level
+	});
+	beat.save();
+
 	req.io.broadcast('heartbeat', level);
 };
 
