@@ -9,7 +9,7 @@ function createTimeline() {
 			lineWidth: 2
 		}
 	);
-	chart.streamTo(document.getElementById("chart"), 5000);
+	chart.streamTo(document.getElementById("chart"), 1000);
 }
 
 (function (io) {
