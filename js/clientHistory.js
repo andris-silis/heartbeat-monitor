@@ -1,4 +1,4 @@
-$.getJSON('/-api/heartbeats?to_ts=1398459968&from_ts=1398451966', function(data) {
+$.getJSON('/-api/heartbeats', function(data) {
 
     var parsedData = [];
     $.each(data, function(elem) {
