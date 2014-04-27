@@ -1,9 +1,9 @@
-var series = new TimeSeries();
 
+var heartbeatSeries = new TimeSeries();
 function createTimeline() {
 	var chart = new SmoothieChart();
 	chart.addTimeSeries(
-		series,
+		heartbeatSeries,
 		{
 			strokeStyle: 'rgba(0, 255, 0, 1)',
 			lineWidth: 2
@@ -12,20 +12,39 @@ function createTimeline() {
 	chart.streamTo(document.getElementById("chart"), 3000);
 }
 
-(function (io) {
+var bpmSeries = new TimeSeries();
+function createTimelineHeartrate() {
+	var chart = new SmoothieChart();
+	chart.addTimeSeries(
+		bpmSeries,
+		{
+			strokeStyle: 'rgba(0, 255, 0, 1)',
+			lineWidth: 2
+		}
+	);
+	chart.streamTo(document.getElementById("chart-heartrate"), 3000);
+}
+
+
+
+
+$(function () {
 	'use strict';
 	var conn = io.connect();
 	var firstTs;
 
-	var appendData = function (data) {
-		series.append(data.ts, data.value);
+	var appendHeartbeatData = function (data) {
+		heartbeatSeries.append(data.ts, data.value);
 	};
-	appendData = _.throttle(appendData, 80);
-
-	conn.on('heartbeat', appendData);
+	appendHeartbeatData = _.throttle(appendHeartbeatData, 80);
+	conn.on('heartbeat', appendHeartbeatData);
 
 	conn.on('bpm', function (data) {
+		var ts = data.ts;
 		var bpm = data.value;
+
+		bpmSeries.append(ts, bpm);
+
 		var $bpm = $('#bpm span');
 
 		if (bpm < 50 || bpm > 100) {
@@ -35,7 +54,15 @@ function createTimeline() {
 		}
 
 		$bpm.text(bpm);
+
+		// beep(100);
 	});
 
+	createTimeline();
+	createTimelineHeartrate();
+
 	window.conn = conn;
-})(window.io);
+});
+
+
+
