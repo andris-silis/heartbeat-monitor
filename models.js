@@ -8,10 +8,12 @@ BaseSchema.index({ ts: 1 });
 
 
 var HeartbeatSchema = BaseSchema;
+var BPMSchema = BaseSchema;
 var TemperatureSchema = BaseSchema;
 
 
 module.exports = {
 	Heartbeat: mongoose.model('Heartbeat', HeartbeatSchema),
-	Temperature: mongoose.model('Temperature', TemperatureSchema)
+	Temperature: mongoose.model('Temperature', TemperatureSchema),
+	BPM: mongoose.model('BPM', BPMSchema)
 };
