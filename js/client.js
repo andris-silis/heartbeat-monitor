@@ -2,8 +2,14 @@ var series = new TimeSeries();
 
 function createTimeline() {
 	var chart = new SmoothieChart();
-	chart.addTimeSeries(series, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
-	chart.streamTo(document.getElementById("chart"), 50);
+	chart.addTimeSeries(
+		series,
+		{
+			strokeStyle: 'rgba(0, 255, 0, 1)',
+			lineWidth: 2
+		}
+	);
+	chart.streamTo(document.getElementById("chart"), 5000);
 }
 
 (function (io) {
@@ -11,9 +17,12 @@ function createTimeline() {
 	var conn = io.connect();
 	var firstTs;
 
-	conn.on('heartbeat', function (data) {
-		series.append(data.ts, data.val);
-	});
+	var appendData = function (data) {
+		series.append(data.ts, data.value);
+	};
+	appendData = _.throttle(appendData, 100);
+
+	conn.on('heartbeat', appendData);
 
 	conn.on('bpm', function (data) {
 		$('#bpm').text(data.value);
