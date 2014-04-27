@@ -24,7 +24,19 @@
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+        <div class="col-sm-9 col-md-10 main">
+            <div class="row">
+                <canvas id="chart" width="800px" height="320px"></canvas>
+            </div>
+            <div class="row" style="margin-top:8px;">
+                <canvas id="chart-heartrate" width="658px" height="320px" style="float:left"></canvas>
+                <div id="bpm" style="font-size:64px;">
+                    <span style="display: inline-block;height:93px;text-align:center;border-radius:4px;position:relative;left:14px;width:128px;"></span>
+                </div>
+                <div id="amplitude"></div>
+            </div>
+        </div>
+        <div class="col-sm-3 col-sm-offset-9 col-md-offset-10 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li class="dropdown-header"></li>
                 <li>
@@ -34,17 +46,6 @@
                     <a href="/history">History</a>
                 </li>
             </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <div class="row">
-                <canvas id="chart" width="800px" height="320px"></canvas>
-            </div>
-            <div class="row" style="margin-top:8px;">
-                <canvas id="chart-heartrate" width="658px" height="320px" style="float:left"></canvas>
-                <div id="bpm" style="font-size:64px;">
-                    <span style="display: inline-block;height:93px;text-align:center;border-radius:4px;position:relative;left:14px;width:128px;"></span>
-                </div>
-            </div>
         </div>
     </div>
 </div>
