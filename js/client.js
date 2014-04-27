@@ -21,8 +21,8 @@ var plot = $.plot("#placeholder", datasets, {
 		shadowSize: 0	// Drawing is faster without shadows
 	},
 	yaxis: {
-		min: -1,
-		max: 2800
+		min: -1000,
+		max: 1800
 	},
 	xaxis: {
 		show: false
