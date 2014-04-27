@@ -9,7 +9,7 @@ function createTimeline() {
 			lineWidth: 2
 		}
 	);
-	chart.streamTo(document.getElementById("chart"), 1000);
+	chart.streamTo(document.getElementById("chart"), 3000);
 }
 
 (function (io) {
@@ -20,7 +20,7 @@ function createTimeline() {
 	var appendData = function (data) {
 		series.append(data.ts, data.value);
 	};
-	appendData = _.throttle(appendData, 100);
+	appendData = _.throttle(appendData, 80);
 
 	conn.on('heartbeat', appendData);
 
