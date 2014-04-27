@@ -18,6 +18,7 @@
     "jquery": "~2.1.0",
     "flot": "~0.8.3",
     "moment": "~2.6.0",
-    "Smooth.js": "https://github.com/osuushi/Smooth.js.git"
+    "Smooth.js": "https://github.com/osuushi/Smooth.js.git",
+    "lodash": "~2.4.1"
   }
 }
